@@ -1,9 +1,12 @@
 {
     "Pagina" : 1,
-    "RangeStart" : 3,
-    "RangeStop" : 4,
+    "RigaIniziale" : 2,
+    "RangeStart" : 1,
+    "RangeStop" : 2,
+    "NomeRange" : "Range",
     "ColonneRipetute" : [ 
-        { "Intestazione" : "Colonna1", "Colonna" : 1 },
-        { "Intestazione" : "Colonna2", "Colonna" : 2 }
+        { "Intestazione" : "C2", "Colonna" : 4 },
+        { "Intestazione" : "C1", "Colonna" : 3 },
+        { "Intestazione" : "C3", "Colonna" : 5 }
     ]
 }

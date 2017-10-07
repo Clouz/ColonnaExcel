@@ -9,8 +9,10 @@ import (
 // Configuration represent conf.json
 type Configuration struct {
 	Pagina          int
+	RigaIniziale    int
 	RangeStart      int
 	RangeStop       int
+	NomeRange       string
 	ColonneRipetute []struct {
 		Intestazione string
 		Colonna      int
