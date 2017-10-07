@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 
 	"github.com/xuri/excelize"
 )
@@ -21,7 +22,8 @@ func main() {
 
 	for _, row := range rows {
 		for _, cell := range row {
-			fmt.Print(cell, " ")
+
+			fmt.Print(cell, "(", reflect.TypeOf(cell), ")", "\t")
 		}
 		fmt.Println()
 	}

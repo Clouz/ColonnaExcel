@@ -8,9 +8,13 @@ import (
 
 // Configuration represent conf.json
 type Configuration struct {
+	Pagina          int
 	RangeStart      int
 	RangeStop       int
-	ColonneRipetute []int
+	ColonneRipetute []struct {
+		Intestazione string
+		Colonna      int
+	}
 }
 
 func leggiCFG(cfgName string) *Configuration {

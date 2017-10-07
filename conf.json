@@ -1,5 +1,9 @@
 {
+    "Pagina" : 1,
     "RangeStart" : 3,
     "RangeStop" : 4,
-    "ColonneRipetute" : [ 1 ]
+    "ColonneRipetute" : [ 
+        { "Intestazione" : "Colonna1", "Colonna" : 1 },
+        { "Intestazione" : "Colonna2", "Colonna" : 2 }
+    ]
 }
