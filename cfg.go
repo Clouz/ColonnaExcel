@@ -19,21 +19,24 @@ type Configuration struct {
 	}
 }
 
-func leggiCFG(cfgName string) *Configuration {
+func leggiCFG(cfgName string) (*Configuration, error) {
 
-	file, _ := os.Open(cfgName)
+	file, err := os.Open(cfgName)
+	if err != nil {
+		return nil, err
+	}
 	decoder := json.NewDecoder(file)
 	Conf := Configuration{}
-	err := decoder.Decode(&Conf)
+	err = decoder.Decode(&Conf)
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
 
-	fmt.Print("Start: ", Conf.RangeStart, " ## Stop: ", Conf.RangeStop, " ## [")
+	fmt.Print("Sheet: ", Conf.Pagina, " ## Start: ", Conf.RangeStart, " ## Stop: ", Conf.RangeStop, " ## [")
 	for _, num := range Conf.ColonneRipetute {
 		fmt.Print(num, "; ")
 	}
 	fmt.Println("]")
 
-	return &Conf
+	return &Conf, err
 }

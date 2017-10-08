@@ -2,25 +2,49 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/xuri/excelize"
 )
 
+var result [][]string
+
 func main() {
-	fmt.Println("Config...")
-	cfg := leggiCFG("conf.json")
-	result, err := LeggiExcel("Prova.xlsx", cfg)
+
+	fmt.Println("Leggo Config...")
+	cfg, err := leggiCFG("conf.json")
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("Config error: ", err)
 		return
 	}
+
+	if len(os.Args) > 1 {
+		fmt.Println("Leggo Excel...")
+		result, err = LeggiExcel(os.Args[1], cfg)
+		//result, err = LeggiExcel("Prova.xlsx", cfg)
+		if err != nil {
+			fmt.Println("Open File error: ", err)
+			return
+		}
+	} else {
+		fmt.Println("Impostare il file conf.json e successivamente trascinare una file excel su questo eseguibile")
+		return
+	}
+
+	fmt.Println("Scrivo Excel...")
 	err = ScriviExcel("result.xlsx", result, cfg)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("Write FIle error: ", err)
 		return
 	}
-	fmt.Print(result)
+
+	//fmt.Println(result)
+
+	fmt.Println("Operazione completata, premere un tasto per chiudere...")
+	var xx string
+	fmt.Scanln(xx)
+
 	//xlsx, err := excelize.OpenFile(os.Args[1])
 }
 
@@ -41,34 +65,27 @@ func LeggiExcel(path string, cfg *Configuration) ([][]string, error) {
 	//Head
 	result[0] = make([]string, co)
 	result[0][0] = cfg.NomeRange
-	fmt.Print(result[0][0], "\t")
 
 	for index := 0; index < len(cfg.ColonneRipetute); index++ {
 		result[0][index+1] = cfg.ColonneRipetute[index].Intestazione
-		fmt.Print(result[0][index+1], "\t")
 	}
-	fmt.Println()
 
 	i := 1
 	//Row
 	for index := cfg.RigaIniziale - 1; index < len(rows); index++ {
-
 		//Collumn
 		for iRow := cfg.RangeStart - 1; iRow < cfg.RangeStop; iRow++ {
 			ii := 0
-			result[i] = make([]string, co)
 
+			result[i] = make([]string, co)
 			result[i][ii] = rows[index][iRow]
-			fmt.Print(result[i][ii], "\t")
 
 			//extra collumn
 			for _, extra := range cfg.ColonneRipetute {
 				ii++
 				result[i][ii] = rows[index][extra.Colonna-1]
-				fmt.Print(result[i][ii], "#\t")
 			}
 			i++
-			fmt.Println()
 		}
 	}
 
@@ -81,7 +98,7 @@ func ScriviExcel(path string, data [][]string, cfg *Configuration) error {
 	foglio := "Sheet1"
 
 	xlsx := excelize.NewFile()
-	index := xlsx.NewSheet(foglio)
+	//index := xlsx.NewSheet(foglio)
 
 	for i, riga := range data {
 		for ii, cella := range riga {
@@ -89,7 +106,7 @@ func ScriviExcel(path string, data [][]string, cfg *Configuration) error {
 		}
 	}
 
-	xlsx.SetActiveSheet(index)
+	//xlsx.SetActiveSheet(index)
 	err := xlsx.SaveAs(path)
 	if err != nil {
 		return err
@@ -100,6 +117,5 @@ func ScriviExcel(path string, data [][]string, cfg *Configuration) error {
 
 func indexToAxis(row int, col int) string {
 	var arr = []string{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}
-
 	return arr[col] + strconv.Itoa(row+1)
 }
