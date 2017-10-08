@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"strconv"
@@ -39,8 +40,7 @@ func main() {
 	}
 
 	fmt.Println("Operazione completata, premere un tasto per chiudere...")
-	var xx string
-	fmt.Scanln(xx)
+	bufio.NewReader(os.Stdin).ReadBytes('\n')
 }
 
 // LeggiExcel Legge il contenuto di un excel e lo incolonna
