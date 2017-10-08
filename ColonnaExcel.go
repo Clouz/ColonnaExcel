@@ -22,7 +22,6 @@ func main() {
 	if len(os.Args) > 1 {
 		fmt.Println("Leggo Excel...")
 		result, err = LeggiExcel(os.Args[1], cfg)
-		//result, err = LeggiExcel("Prova.xlsx", cfg)
 		if err != nil {
 			fmt.Println("Open File error: ", err)
 			return
@@ -39,13 +38,9 @@ func main() {
 		return
 	}
 
-	//fmt.Println(result)
-
 	fmt.Println("Operazione completata, premere un tasto per chiudere...")
 	var xx string
 	fmt.Scanln(xx)
-
-	//xlsx, err := excelize.OpenFile(os.Args[1])
 }
 
 // LeggiExcel Legge il contenuto di un excel e lo incolonna
