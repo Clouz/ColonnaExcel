@@ -1,12 +1,13 @@
 {
     "Pagina" : 1,
     "RigaIniziale" : 2,
-    "RangeStart" : 1,
-    "RangeStop" : 2,
-    "NomeRange" : "Range",
+    "RangeStart" : 2,
+    "RangeStop" : 3,
+    "NomeRange" : "Route",
     "ColonneRipetute" : [ 
-        { "Intestazione" : "C2", "Colonna" : 4 },
-        { "Intestazione" : "C1", "Colonna" : 3 },
-        { "Intestazione" : "C3", "Colonna" : 5 }
-    ]
+        { "Intestazione" : "ID", "Colonna" : 1 },
+        { "Intestazione" : "kV", "Colonna" : 4 },
+        { "Intestazione" : "Diameter", "Colonna" : 5 }
+    ],
+    "CelleDaEscludere":  [""]
 }

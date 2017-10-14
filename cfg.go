@@ -17,6 +17,7 @@ type Configuration struct {
 		Intestazione string
 		Colonna      int
 	}
+	CelleDaEscludere []string
 }
 
 func leggiCFG(cfgName string) (*Configuration, error) {
